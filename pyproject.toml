@@ -288,7 +288,8 @@ devel-devscripts = [
     "twine>=4.0.2",
 ]
 devel-duckdb = [
-    "duckdb>=0.9.0",
+    "duckdb>=0.9.0; python_version < '3.12'",
+    "duckdb>=0.9.3.dev2938; python_version == '3.12'",
 ]
 # Mypy 0.900 and above ships only with stubs from stdlib so if we need other stubs, we need to install them
 # manually as `types-*`. See https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-imports
@@ -533,6 +534,7 @@ alibaba = [
   "oss2>=2.14.0",
 ]
 amazon = [
+  "PyAthena>=3.0.10",
   "apache-airflow[common_sql]",
   "apache-airflow[http]",
   "asgiref",
@@ -552,14 +554,13 @@ amazon = [
   "mypy-boto3-redshift-data>=1.33.0",
   "mypy-boto3-s3>=1.33.0",
   "s3fs>=2023.10.0",
-  "PyAthena>=3.0.10",
 ]
 apache-beam = [
-  "apache-beam>=2.53.0",
-  "pyarrow>=14.0.1",
+  "apache-beam>=2.53.0;python_version != \"3.12\"",
+  "pyarrow>=14.0.1;python_version != \"3.12\"",
 ]
 apache-cassandra = [
-  "cassandra-driver>=3.13.0",
+  "cassandra-driver>=3.13.0;python_version != \"3.12\"",
 ]
 apache-drill = [
   "apache-airflow[common_sql]",
@@ -1209,6 +1210,13 @@ platforms = ["linux", "macos"]
 description = "Environment with Python 3.11. No devel installed"
 features = []
 
+[tool.hatch.envs.airflow-312]
+python = "3.12"
+platforms = ["linux", "macos"]
+description = "Environment with Python 3.12. No devel installed"
+features = []
+
+
 [tool.hatch.version]
 path = "airflow/__init__.py"
 
@@ -1252,7 +1260,7 @@ artifacts = [
 
 [tool.black]
 line-length = 110
-target-version = ['py38', 'py39', 'py310', 'py311']
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
 
 [tool.ruff]
 target-version = "py38"

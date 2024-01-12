@@ -19,7 +19,11 @@ from __future__ import annotations
 
 from unittest.mock import patch
 
-from airflow.providers.apache.cassandra.sensors.record import CassandraRecordSensor
+import pytest
+
+cassandra = pytest.importorskip("cassandra")
+
+from airflow.providers.apache.cassandra.sensors.record import CassandraRecordSensor  # noqa: E402
 
 TEST_CASSANDRA_CONN_ID = "cassandra_default"
 TEST_CASSANDRA_TABLE = "t"

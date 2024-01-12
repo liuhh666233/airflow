@@ -22,7 +22,9 @@ from unittest.mock import call
 
 import pytest
 
-from airflow.providers.google.cloud.transfers.cassandra_to_gcs import CassandraToGCSOperator
+cassandra = pytest.importorskip("cassandra")
+
+from airflow.providers.google.cloud.transfers.cassandra_to_gcs import CassandraToGCSOperator  # noqa: E402
 
 TMP_FILE_NAME = "temp-file"
 TEST_BUCKET = "test-bucket"

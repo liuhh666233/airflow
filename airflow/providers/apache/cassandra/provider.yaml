@@ -45,6 +45,22 @@ dependencies:
   - apache-airflow>=2.6.0
   - cassandra-driver>=3.13.0
 
+# Cassandra provider is not yet compatible with Python 3.12
+# The main issue is that python cassandra driver by default uses asyncore which has been deprecated since
+# Python 3.6 and removed in Python 3.12 (https://docs.python.org/3.11/library/asyncore.html)
+# The issue is tracked here: https://datastax-oss.atlassian.net/browse/PYTHON-1375 and is scheduled
+# to be fixed in cassandra-driver 3.30.0.
+#
+# All Cassandra tests are automatically skipped if cassandra package is not present, so once you remove the
+# exclusion, they will start running for Python 3.12. You can remove the list below then.
+#
+#   tests/providers/apache/cassandra/sensors/test_record.py
+#   tests/providers/apache/cassandra/sensors/test_table.py
+#   tests/integration/providers/apache/cassandra/hooks/test_cassandra.py
+#   tests/providers/google/cloud/transfers/test_cassandra_to_gcs.py
+#
+excluded-python-versions: ['3.12']
+
 integrations:
   - integration-name: Apache Cassandra
     external-doc-url: https://cassandra.apache.org/

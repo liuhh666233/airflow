@@ -62,6 +62,8 @@ additional-extras:
     dependencies:
       - apache-beam[gcp]
 
+excluded-python-versions: ['3.12']
+
 integrations:
   - integration-name: Apache Beam
     external-doc-url: https://beam.apache.org/

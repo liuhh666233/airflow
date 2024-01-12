@@ -21,17 +21,21 @@ import re
 from unittest import mock
 
 import pytest
-from cassandra.cluster import Cluster
-from cassandra.policies import (
+
+cassandra = pytest.importorskip("cassandra")
+
+
+from cassandra.cluster import Cluster  # noqa: E402
+from cassandra.policies import (  # noqa: E402
     DCAwareRoundRobinPolicy,
     RoundRobinPolicy,
     TokenAwarePolicy,
     WhiteListRoundRobinPolicy,
 )
 
-from airflow.models import Connection
-from airflow.providers.apache.cassandra.hooks.cassandra import CassandraHook
-from airflow.utils import db
+from airflow.models import Connection  # noqa: E402
+from airflow.providers.apache.cassandra.hooks.cassandra import CassandraHook  # noqa: E402
+from airflow.utils import db  # noqa: E402
 
 
 @pytest.mark.integration("cassandra")
